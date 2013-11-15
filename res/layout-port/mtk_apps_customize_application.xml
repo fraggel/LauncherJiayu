@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.launcher2.MTKAppIcon android:id="@id/application_icon" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:launcher="http://schemas.android.com/apk/res/com.android.launcher">
+    <com.android.launcher2.PagedViewIcon android:gravity="center_horizontal" android:id="@id/app_customize_application_icon" android:background="@drawable/focusable_view_bg" android:focusable="true" android:layout_width="fill_parent" android:layout_height="fill_parent" style="@style/WorkspaceIcon.Portrait.AppsCustomize" />
+    <ViewStub android:id="@id/app_customize_unread_stub" android:layout="@layout/mtk_unread_text_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="0.0dip" android:layout_marginRight="13.0dip" android:layout_alignParentTop="true" android:layout_alignParentRight="true" />
+</com.android.launcher2.MTKAppIcon>
