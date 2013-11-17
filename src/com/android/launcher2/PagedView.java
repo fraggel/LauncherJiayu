@@ -285,7 +285,13 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
         return mCurrentPage;
     }
     int getNextPage() {
-        return (mNextPage != INVALID_PAGE) ? mNextPage : mCurrentPage;
+        int page=-1;
+        if(mNextPage != INVALID_PAGE){
+            page=mNextPage;
+        }else{
+            page=mCurrentPage;
+        }
+        return page;
     }
 
     int getPageCount() {
@@ -1306,7 +1312,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
                 if (sCanCallEnterAppWidget) {
                     int page = mCurrentPage;
                     if (deltaX < 0) {
-                        page = mCurrentPage > 0 ? mCurrentPage - 1 : 0;
+                        page = mCurrentPage > -1 ? mCurrentPage - 1 : 0;
                     } else {
                         page = mCurrentPage < getChildCount() - 1 ? mCurrentPage + 1 : getChildCount() - 1;
                     }
@@ -1416,7 +1422,8 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
                 // at this point we have not moved beyond the touch slop
                 // (otherwise mTouchState would be TOUCH_STATE_SCROLLING), so
                 // we can just page
-                int nextPage = Math.max(0, mCurrentPage - 1);
+                int nextPage = Math.max(-1, mCurrentPage - 1);
+
                 if (LauncherLog.DEBUG) {
                     LauncherLog.d(TAG, "TOUCH_STATE_PREV_PAGE: mCurrentPage = " + mCurrentPage
                             + ", nextPage = " + nextPage + ", this = " + this);
@@ -1430,7 +1437,9 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
                 // at this point we have not moved beyond the touch slop
                 // (otherwise mTouchState would be TOUCH_STATE_SCROLLING), so
                 // we can just page
-                int nextPage = Math.min(getChildCount() - 1, mCurrentPage + 1);
+                int nextPage = Math.min(getChildCount(), mCurrentPage + 1);
+
+
                 if (LauncherLog.DEBUG) {
                     LauncherLog.d(TAG, "TOUCH_STATE_NEXT_PAGE: mCurrentPage = " + mCurrentPage
                             + ", nextPage = " + nextPage + ", this = " + this);
@@ -1698,6 +1707,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
 
     protected void snapToPage(int whichPage, int duration) {
         whichPage = Math.max(0, Math.min(whichPage, getPageCount() - 1));
+
 
         if (DEBUG) Log.d(TAG, "snapToPage.getChildOffset(): " + getChildOffset(whichPage));
         if (DEBUG) Log.d(TAG, "snapToPage.getRelativeChildOffset(): " + getMeasuredWidth() + ", "

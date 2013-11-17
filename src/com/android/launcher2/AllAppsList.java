@@ -317,7 +317,7 @@ class AllAppsList {
 
         sTopPackages = new ArrayList<TopPackage>();
 
-        /*try {
+        try {
             XmlResourceParser parser = context.getResources().getXml(R.xml.default_toppackage);
             AttributeSet attrs = Xml.asAttributeSet(parser);
             XmlUtils.beginDocument(parser, TAG_TOPPACKAGES);
@@ -349,7 +349,7 @@ class AllAppsList {
             LauncherLog.w(TAG, "Got XmlPullParserException while parsing toppackage.", e);
         } catch (IOException e) {
             LauncherLog.w(TAG, "Got IOException while parsing toppackage.", e);
-        }*/
+        }
 
         return bRet;
     }
