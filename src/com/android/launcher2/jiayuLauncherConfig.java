@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.launcher.R;
@@ -12,7 +14,7 @@ import com.android.launcher.R;
 /**
  * Created by Fraggel on 16/11/13.
  */
-public class jiayuLauncherConfig extends Activity implements SeekBar.OnSeekBarChangeListener, View.OnClickListener {
+public class jiayuLauncherConfig extends Activity implements SeekBar.OnSeekBarChangeListener, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     SeekBar s1 =null;
     SeekBar s2 =null;
     SeekBar s3 =null;
@@ -21,6 +23,7 @@ public class jiayuLauncherConfig extends Activity implements SeekBar.OnSeekBarCh
     TextView t2=null;
     TextView t3=null;
     TextView t4=null;
+    Switch sw1=null;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.jiayu_launcher_config);
@@ -32,13 +35,26 @@ public class jiayuLauncherConfig extends Activity implements SeekBar.OnSeekBarCh
         t2 =(TextView)findViewById(R.id.textView4);
         t3 =(TextView)findViewById(R.id.textView6);
         t4 =(TextView)findViewById(R.id.textView7);
+        sw1 =(Switch) findViewById(R.id.switch1);
 
         s1.setOnSeekBarChangeListener(this);
         s2.setOnSeekBarChangeListener(this);
         s3.setOnSeekBarChangeListener(this);
         s4.setOnSeekBarChangeListener(this);
+        sw1.setOnCheckedChangeListener(this);
+
         Button b1=(Button)findViewById(R.id.button);
         b1.setOnClickListener(this);
+        initValues();
+    }
+
+    private void initValues() {
+        try {
+            sw1.setChecked(Utils.getSharedPreferencesBoolean(getApplicationContext(), "allow_rotation", false));
+
+        }catch(Exception e){
+
+        }
     }
 
     @Override
@@ -85,8 +101,37 @@ public class jiayuLauncherConfig extends Activity implements SeekBar.OnSeekBarCh
 
     @Override
     public void onClick(View v) {
-        Utils.setSharedPreferences(getApplicationContext(),"mScroolX","7");
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if(buttonView.getId()==R.id.switch1){
+            if(isChecked){
+                sw1.setChecked(true);
+                Utils.setSharedPreferencesBoolean(getApplicationContext(), "allow_rotation", true);
+            }else{
+                sw1.setChecked(false);
+                Utils.setSharedPreferencesBoolean(getApplicationContext(), "allow_rotation", false);
+            }
+
+        }else if(buttonView.getId()==R.id.switch2){
+
+        }
+
+    }
+    public void resetLauncher(){
         System.exit(0);
-        return;
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        resetLauncher();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

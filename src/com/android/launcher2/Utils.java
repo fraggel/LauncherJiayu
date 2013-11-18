@@ -50,12 +50,24 @@ public class Utils
 
     public static boolean getSharedPreferencesBoolean(Context paramContext, String paramString, boolean paramBoolean)
     {
-        return PreferenceManager.getDefaultSharedPreferences(paramContext).getBoolean(paramString, paramBoolean);
+        boolean a=false;
+        try{
+            a=PreferenceManager.getDefaultSharedPreferences(paramContext).getBoolean(paramString, paramBoolean);
+        }catch(Exception e){
+
+        }
+        return a;
     }
 
     public static float getSharedPreferencesFloat(Context paramContext, String paramString, float paramFloat)
     {
-        return PreferenceManager.getDefaultSharedPreferences(paramContext).getFloat(paramString, paramFloat);
+        float a=0;
+        try{
+            a=PreferenceManager.getDefaultSharedPreferences(paramContext).getFloat(paramString, paramFloat);
+        }catch(Exception e){
+
+        }
+        return a;
     }
 
     public static int getSharedPreferencesInt(Context paramContext, String paramString, int paramInt)

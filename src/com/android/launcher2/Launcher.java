@@ -4566,8 +4566,11 @@ public final class Launcher extends Activity
 
     public boolean isRotationEnabled() {
         boolean forceEnableRotation = doesFileExist(FORCE_ENABLE_ROTATION_PROPERTY);
-        boolean enableRotation = forceEnableRotation ||
-                getResources().getBoolean(R.bool.allow_rotation);
+        boolean sharedRotation=Utils.getSharedPreferencesBoolean(getApplicationContext(),"allow_rotation",false);
+
+        boolean enableRotation = forceEnableRotation || sharedRotation;
+        /*boolean enableRotation = forceEnableRotation ||
+                getResources().getBoolean(R.bool.allow_rotation);*/
         return enableRotation;
     }
     public void lockScreenOrientation() {
