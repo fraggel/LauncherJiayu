@@ -273,25 +273,4 @@ s -->
     <string name="custom_workspace_cling_title_2"></string>
     <!-- Dummy string [CHAR_LIMIT=60] -->
     <string name="custom_workspace_cling_description_2"></string>
-    <string name="menu_settings_launcher">Launcher settings</string>
-    <string name="menu_widgets">Widgets</string>
-
-    <string-array name="jiayuconfigRows">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-    </string-array>
-    <string-array name="jiayuconfigCols">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-    </string-array>
 </resources>
